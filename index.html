@@ -1,0 +1,178 @@
+
+
+
+<html>
+	<head>
+		<title>SOME BS</title>
+        <h1 >SOME BS</h1>
+        <style>
+            h1
+{
+  color: red;
+  background-color: gray ;	
+}
+canvas
+{
+  background-color: black;
+}
+</style>
+<script>
+    window.onload=function()
+{
+  var dir=0;var t=Date.now();var tp,fps;var x1=Math.random()*585; var y1=Math.random()*385; var score=0;
+  var x=300,y=200;
+  var canvas=document.getElementById("canvas");
+  var up=document.getElementById("up");
+  var down=document.getElementById("down");
+  var right=document.getElementById("right");
+  var left=document.getElementById("left");
+  var context=canvas.getContext("2d");
+  var reset=document.getElementById("reset");
+  down.onmousedown=function()
+  {
+      dir=2;
+  }
+  up.onmousedown=function()
+  {
+      dir=5;
+  }
+  right.onmousedown=function()
+  {
+      dir=3;
+  }
+  left.onmousedown=function()
+  {
+      dir=1;
+  }
+  down.ontouchstart=function()
+  {
+      dir=2;
+  }
+  up.ontouchstart=function()
+  {
+      dir=5;
+  }
+  right.ontouchstart=function()
+  {
+      dir=3;
+  }
+  left.ontouchstart=function()
+  {
+      dir=1;
+  }
+  down.onmouseup=function()
+  {
+      dir=0;
+  }
+  up.onmouseup=function()
+  {
+      dir=0;
+  }
+  right.onmouseup=function()
+  {
+      dir=0;
+  }
+  left.onmouseup=function()
+  {
+      dir=0;
+  }
+  down.ontouchend=function()
+  {
+      dir=0;
+  }
+  up.ontouchend=function()
+  {
+      dir=0;
+  }
+  right.ontouchend=function()
+  {
+      dir=0;
+  }
+  left.ontouchend=function()
+  {
+      dir=0;
+  }
+  reset.onmousedown=function()
+  {
+      score=0;
+      x1=Math.random()*585; y1=Math.random()*385;
+      x=300,y=200;
+      
+  }
+  reset.ontouchstart=function()
+  {
+      score=0;
+      x1=Math.random()*585; y1=Math.random()*385;
+      x=300,y=200;
+      
+  }
+  function draw()
+  {  
+      tp=(Date.now()-t)/1000;
+      fps=Math.round(1/tp);
+      t=Date.now();
+      context.clearRect(0,0,600,400);
+      context.beginPath();
+      context.arc(x,y,25,0,2*Math.PI);
+      context.strokeStyle="yellow";
+      context.stroke();
+      context.fillStyle="red";
+      context.fill();
+      if(x<=25)
+       x=25;
+      if(y<=25)
+       y=25;
+      if(y>=375)
+       y=375;
+      if(x>=575)
+       x=575;
+     
+      if(dir==5)
+      y-=5;
+      if(dir==2)
+      y+=5;
+      if(dir==1)
+      x-=5;
+      if(dir==3)
+      x+=5;
+    
+      
+      context.beginPath();
+      context.arc(x1,y1,15,0,2*Math.PI);
+      context.strokeStyle="yellow";
+      context.stroke();
+     if(Math.pow(Math.abs((x-x1)*(x-x1)+(y-y1)*(y-y1)),0.5)<=40)
+     {
+         score++;
+          x1=Math.random()*585; y1=Math.random()*385;
+     }   
+      
+      
+      
+
+      context.font="25px Garamond";
+      context.fillStyle='white';
+      context.fillText("dir: "+dir,0,20);
+      context.fillText("fps: "+fps,0,50);
+      context.fillText("Score: "+score,0,80);
+
+      window.requestAnimationFrame(draw);
+
+  }
+  draw();
+  
+
+}
+</script>
+
+	</head>
+	<body align="center">
+		<canvas id="canvas" width ="600" height="400"></canvas><br>
+        <button align="center" id="up">↑</button><br>
+        <button align="center"id="left">←</button>
+        <button align="center" id="down">↓</button>
+        <button align="center" id="right">→</button>
+        <br>
+        <button align="center" id="reset">RESET</button>
+	</body>
+</html>
